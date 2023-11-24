@@ -23,7 +23,11 @@ public class Network
         for(int i = 0;i < wishesNumber;i++)
         {
            Devices.get(i).start();
-
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
         }
 
