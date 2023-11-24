@@ -3,14 +3,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class Semaphore {
     private int value;
     private FileWriter file;
-
     public Semaphore(int maxNumber)
     {
-
         this.value = maxNumber;
         File test = new File("test.txt");
         if(!test.exists())
@@ -21,17 +18,14 @@ public class Semaphore {
                 throw new RuntimeException(e);
             }
         }
-
     }
     public synchronized void wait(Device device) throws InterruptedException {
         value--;
         if(value < 0){
-            //System.out.println("(" + device.getConnectionName() + ") (" + device.getType() + ") arrived and waiting");
             write("(" + device.getConnectionName() + ") (" + device.getType() + ") arrived and waiting");
             wait();
         }
         else{
-            //System.out.println("(" + device.getConnectionName() + ") (" + device.getType() + ") arrived");
             write("(" + device.getConnectionName() + ") (" + device.getType() + ") arrived");
         }
     }

@@ -1,7 +1,6 @@
 package pkgsynchronized.network.CodeSystem;
 import java.util.ArrayList;
 import java.util.Scanner;  // Import the Scanner class
-
 public class Network
 {
     public static void main(String[] args) {
@@ -19,7 +18,6 @@ public class Network
             NewDevice.setRouter(router);
             Devices.add(NewDevice);
         }
-
         for(int i = 0;i < wishesNumber;i++)
         {
            Devices.get(i).start();
@@ -28,9 +26,6 @@ public class Network
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-
         }
-
-
     }
 }

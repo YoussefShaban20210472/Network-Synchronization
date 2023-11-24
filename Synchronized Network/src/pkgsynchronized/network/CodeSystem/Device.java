@@ -28,7 +28,6 @@ public class Device extends Thread{
         doWork();
         disconnect();
     }
-
     public void connect() {
         try {
             Thread.sleep(100);
@@ -40,28 +39,22 @@ public class Device extends Thread{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-       // System.out.println("Connection " + this.connectionNumber + ":" + this.connectionName + " login");
         router.write("Connection " + this.connectionNumber + ":" + this.connectionName + " login");
     }
-
     public void doWork() {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-       // System.out.println("Connection " + this.connectionNumber + ":" + this.connectionName + " perfoms online activity");
         router.write("Connection " + this.connectionNumber + ":" + this.connectionName + " perfoms online activity");
     }
-
     public synchronized void disconnect() {
         try {
             Thread.sleep(100);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        //System.out.println("Connection " + this.connectionNumber + ":" + this.connectionName + " Logged Out");
         router.write("Connection " + this.connectionNumber + ":" + this.connectionName + " Logged Out");
         router.disconnectDevice(this);
        try {
@@ -69,8 +62,6 @@ public class Device extends Thread{
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
     public int getConnectionNumber() {

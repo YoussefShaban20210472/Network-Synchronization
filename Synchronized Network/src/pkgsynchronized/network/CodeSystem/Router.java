@@ -3,14 +3,11 @@ package pkgsynchronized.network.CodeSystem;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
 public class Router {
     //private ArrayList<Device> Connections;
     private Device[] Connections;
     private Semaphore semaphore;
     int maxConnections;
-    //int used = 0;
-
     public Router(int maxConnections) {
         this.maxConnections = maxConnections;
         this.semaphore = new Semaphore(maxConnections);
@@ -21,7 +18,6 @@ public class Router {
            Connections[i] = null;
        }
     }
-
     public  int connectDevice(Device device) throws InterruptedException {
         semaphore.wait(device);
         synchronized (this)
@@ -35,23 +31,14 @@ public class Router {
                     break;
                 }
             }
-        //Connections[used] = device; //   0 1 2
-
-        //System.out.println("Connection "  + index + ":" + device.getConnectionName() + " Occupied");
             write("Connection "  + index + ":" + device.getConnectionName() + " Occupied");
-       // int base = used;
-        //used = (used + 1) % maxConnections;
         return index;
         }
     }
 
     public synchronized void disconnectDevice(Device device) {
-       // Connections.remove(device);
-        //used--;
-        //System.out.println("1");
         Connections[device.getConnectionNumber()] = null;
         semaphore.signal();
-
     }
     public void write(String text)
     {
