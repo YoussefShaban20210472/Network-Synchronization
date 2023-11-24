@@ -1,5 +1,7 @@
 package pkgsynchronized.network.CodeSystem;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Router {
@@ -21,11 +23,6 @@ public class Router {
     }
 
     public  int connectDevice(Device device) throws InterruptedException {
-      /*  try {
-            Thread.sleep(800);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }*/
         semaphore.wait(device);
         synchronized (this)
         {
@@ -40,7 +37,8 @@ public class Router {
             }
         //Connections[used] = device; //   0 1 2
 
-        System.out.println("Connection "  + index + ":" + device.getConnectionName() + " Occupied");
+        //System.out.println("Connection "  + index + ":" + device.getConnectionName() + " Occupied");
+            write("Connection "  + index + ":" + device.getConnectionName() + " Occupied");
        // int base = used;
         //used = (used + 1) % maxConnections;
         return index;
@@ -54,6 +52,10 @@ public class Router {
         Connections[device.getConnectionNumber()] = null;
         semaphore.signal();
 
+    }
+    public void write(String text)
+    {
+        semaphore.write(text);
     }
 }
 
