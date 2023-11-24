@@ -1,13 +1,15 @@
 package pkgsynchronized.network.CodeSystem;
 
-import java.util.ArrayList;
+
 
 public class Semaphore {
     private int value;
 
     public Semaphore(int maxNumber)
     {
+
         this.value = maxNumber;
+
     }
     public synchronized void wait(Device device) throws InterruptedException {
         value--;
@@ -22,7 +24,9 @@ public class Semaphore {
     public synchronized void signal(){
         value++;
         if(value <= 0){
-            notifyAll();
+            notify();
         }
     }
+
+
 }

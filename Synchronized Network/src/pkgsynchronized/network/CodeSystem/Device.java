@@ -1,6 +1,6 @@
 package pkgsynchronized.network.CodeSystem;
 
-public class Device {
+public class Device extends Thread{
     private int connectionNumber;
     private String type;
     private String connectionName;
@@ -39,12 +39,16 @@ public class Device {
     }
 
     public void doWork() {
+
         System.out.println("Connection " + this.connectionNumber + ":" + this.connectionName + " perfoms online activity");
     }
 
-    public void disconnect() {
-        router.disconnectDevice(this);
+    public synchronized void disconnect() {
+
         System.out.println("Connection " + this.connectionNumber + ":" + this.connectionName + " Logged Out");
+        router.disconnectDevice(this);
+
+
     }
 
 }

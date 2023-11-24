@@ -13,14 +13,20 @@ public class Router {
         this.Connections = new ArrayList<Device>();
     }
 
-    public int connectDevice(Device device) throws InterruptedException {
+    public  int connectDevice(Device device) throws InterruptedException {
+      /*  try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }*/
         semaphore.wait(device);
+        synchronized (this){
         Connections.add(device);
-        System.out.println("Connection "  + Connections.indexOf(device) + ":" + device.getConnectionName() + "Occupied");
-        return Connections.indexOf(device);
+        System.out.println("Connection "  + Connections.indexOf(device) + ":" + device.getConnectionName() + " Occupied");
+        return Connections.indexOf(device);}
     }
 
-    public void disconnectDevice(Device device) {
+    public synchronized void disconnectDevice(Device device) {
         Connections.remove(device);
         semaphore.signal();
     }
